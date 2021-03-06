@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Error>
+  <Code>NoSuchBucket</Code>
+  <Message>The specified bucket does not exist.</Message>
+  <RequestId>58AE46D083B4CE0522E789D2</RequestId>
+  <HostId>tongzhen.oss-cn-beijing.aliyuncs.com</HostId>
+  <BucketName>tongzhen</BucketName>
+</Error>

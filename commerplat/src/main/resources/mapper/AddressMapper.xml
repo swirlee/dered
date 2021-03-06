@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.asjy.commerplat.dao.AddressMapper" >
+  <resultMap id="BaseResultMap" type="com.asjy.commerplat.model.Address" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="addtime" property="addtime" jdbcType="TIMESTAMP" />
+    <result column="userid" property="userid" jdbcType="INTEGER" />
+    <result column="provinceid" property="provinceid" jdbcType="INTEGER" />
+    <result column="cityid" property="cityid" jdbcType="INTEGER" />
+    <result column="areaid" property="areaid" jdbcType="INTEGER" />
+    <result column="address" property="address" jdbcType="VARCHAR" />
+    <result column="zipcode" property="zipcode" jdbcType="VARCHAR" />
+    <result column="receiver" property="receiver" jdbcType="VARCHAR" />
+    <result column="tel" property="tel" jdbcType="VARCHAR" />
+    <result column="defaultaddress" property="defaultaddress" jdbcType="BIT" />
+    <association property="province" javaType="com.asjy.commerplat.model.City">
+	    <id column="id" property="id" jdbcType="INTEGER" />
+    	<result column="provincename" property="cityname" jdbcType="VARCHAR" />
+    	<result column="pid" property="pid" jdbcType="INTEGER" />
+    </association>
+    <association property="city" javaType="com.asjy.commerplat.model.City">
+	    <id column="id" property="id" jdbcType="INTEGER" />
+    	<result column="cityname" property="cityname" jdbcType="VARCHAR" />
+    	<result column="pid" property="pid" jdbcType="INTEGER" />
+    </association>
+    <association property="area" javaType="com.asjy.commerplat.model.City">
+	    <id column="id" property="id" jdbcType="INTEGER" />
+    	<result column="areaname" property="cityname" jdbcType="VARCHAR" />
+    	<result column="pid" property="pid" jdbcType="INTEGER" />
+    </association>
+  </resultMap>
+  
+  <sql id="Base_Column_List" >
+    id, addtime, userid, provinceid, cityid, areaid, address, zipcode, receiver, tel, 
+    defaultaddress
+  </sql>
+  
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_address
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  
+  <select id="selectByUserid" resultMap="BaseResultMap">
+    select 
+    ad.id, ad.addtime, ad.userid, ad.provinceid, ad.cityid, ad.areaid, ad.address, ad.zipcode, ad.receiver, ad.tel, ad.defaultaddress,
+    pr.cityname as provincename, ci.cityname as cityname, ar.cityname as areaname
+    from tb_address ad
+    left join tb_city pr on pr.id=ad.provinceid
+    left join tb_city ci on ci.id=ad.cityid
+    left join tb_city ar on ar.id=ad.areaid
+    where userid = #{userid}
+    order by ad.defaultaddress desc , ad.addtime desc
+  </select>
+  
+  <select id="selectByaddressid" resultMap="BaseResultMap">
+    select 
+    ad.id, ad.addtime, ad.userid, ad.provinceid, ad.cityid, ad.areaid, ad.address, ad.zipcode, ad.receiver, ad.tel, ad.defaultaddress,
+    pr.cityname as provincename, ci.cityname as cityname, ar.cityname as areaname
+    from tb_address ad
+    left join tb_city pr on pr.id=ad.provinceid
+    left join tb_city ci on ci.id=ad.cityid
+    left join tb_city ar on ar.id=ad.areaid
+    where ad.id = #{id}
+  </select>
+  
+   <select id="findDefaultaddressByUserid" resultMap="BaseResultMap">
+    select 
+    ad.id, ad.addtime, ad.userid, ad.provinceid, ad.cityid, ad.areaid, ad.address, ad.zipcode, ad.receiver, ad.tel, ad.defaultaddress,
+    pr.cityname as provincename, ci.cityname as cityname, ar.cityname as areaname
+    from tb_address ad
+    left join tb_city pr on pr.id=ad.provinceid
+    left join tb_city ci on ci.id=ad.cityid
+    left join tb_city ar on ar.id=ad.areaid
+    where userid = #{userid} and defaultaddress = 1
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tb_address
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  
+  <insert id="insert" parameterType="com.asjy.commerplat.model.Address" >
+    insert into tb_address (id, addtime, userid, 
+      provinceid, cityid, areaid, 
+      address, zipcode, receiver, 
+      tel, defaultaddress)
+    values (#{id,jdbcType=INTEGER}, #{addtime,jdbcType=TIMESTAMP}, #{userid,jdbcType=INTEGER}, 
+      #{provinceid,jdbcType=INTEGER}, #{cityid,jdbcType=INTEGER}, #{areaid,jdbcType=INTEGER}, 
+      #{address,jdbcType=VARCHAR}, #{zipcode,jdbcType=VARCHAR}, #{receiver,jdbcType=VARCHAR}, 
+      #{tel,jdbcType=VARCHAR}, #{defaultaddress,jdbcType=BIT})
+  </insert>
+  
+  <insert id="insertSelective" parameterType="com.asjy.commerplat.model.Address" >
+    insert into tb_address
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="addtime != null" >
+        addtime,
+      </if>
+      <if test="userid != null" >
+        userid,
+      </if>
+      <if test="provinceid != null" >
+        provinceid,
+      </if>
+      <if test="cityid != null" >
+        cityid,
+      </if>
+      <if test="areaid != null" >
+        areaid,
+      </if>
+      <if test="address != null" >
+        address,
+      </if>
+      <if test="zipcode != null" >
+        zipcode,
+      </if>
+      <if test="receiver != null" >
+        receiver,
+      </if>
+      <if test="tel != null" >
+        tel,
+      </if>
+      <if test="defaultaddress != null" >
+        defaultaddress,
+      </if>
+    </trim>
+    
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="addtime != null" >
+        #{addtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userid != null" >
+        #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="provinceid != null" >
+        #{provinceid,jdbcType=INTEGER},
+      </if>
+      <if test="cityid != null" >
+        #{cityid,jdbcType=INTEGER},
+      </if>
+      <if test="areaid != null" >
+        #{areaid,jdbcType=INTEGER},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="zipcode != null" >
+        #{zipcode,jdbcType=VARCHAR},
+      </if>
+      <if test="receiver != null" >
+        #{receiver,jdbcType=VARCHAR},
+      </if>
+      <if test="tel != null" >
+        #{tel,jdbcType=VARCHAR},
+      </if>
+      <if test="defaultaddress != null" >
+        #{defaultaddress,jdbcType=BIT},
+      </if>
+    </trim>
+  </insert>
+  
+  <update id="updateByPrimaryKeySelective" parameterType="com.asjy.commerplat.model.Address" >
+    update tb_address
+    <set >
+      <if test="addtime != null" >
+        addtime = #{addtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userid != null" >
+        userid = #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="provinceid != null" >
+        provinceid = #{provinceid,jdbcType=INTEGER},
+      </if>
+      <if test="cityid != null" >
+        cityid = #{cityid,jdbcType=INTEGER},
+      </if>
+      <if test="areaid != null" >
+        areaid = #{areaid,jdbcType=INTEGER},
+      </if>
+      <if test="address != null" >
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="zipcode != null" >
+        zipcode = #{zipcode,jdbcType=VARCHAR},
+      </if>
+      <if test="receiver != null" >
+        receiver = #{receiver,jdbcType=VARCHAR},
+      </if>
+      <if test="tel != null" >
+        tel = #{tel,jdbcType=VARCHAR},
+      </if>
+      <if test="defaultaddress != null" >
+        defaultaddress = #{defaultaddress,jdbcType=BIT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  
+  
+  <update id="updateByPrimaryKey" parameterType="com.asjy.commerplat.model.Address" >
+    update tb_address
+    set addtime = #{addtime,jdbcType=TIMESTAMP},
+      userid = #{userid,jdbcType=INTEGER},
+      provinceid = #{provinceid,jdbcType=INTEGER},
+      cityid = #{cityid,jdbcType=INTEGER},
+      areaid = #{areaid,jdbcType=INTEGER},
+      address = #{address,jdbcType=VARCHAR},
+      zipcode = #{zipcode,jdbcType=VARCHAR},
+      receiver = #{receiver,jdbcType=VARCHAR},
+      tel = #{tel,jdbcType=VARCHAR},
+      defaultaddress = #{defaultaddress,jdbcType=BIT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  
+  
+	<update id="updateDefaultAddressToZero" parameterType="com.asjy.commerplat.model.Address" >
+		update tb_address set defaultaddress = 0
+		where userid=#{userid}
+	</update>
+	
+	<update id="updateDefaultAddress" parameterType="com.asjy.commerplat.model.Address" >
+		update tb_address set defaultaddress = 1
+		where id = #{id}
+	</update>
+	
+</mapper>

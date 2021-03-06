@@ -1,0 +1,312 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.asjy.commerplat.dao.FloorMapper" >
+  <resultMap id="BaseResultMap" type="com.asjy.commerplat.model.Floor" >
+  
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="addtime" property="addtime" jdbcType="TIMESTAMP" />
+    <result column="floorname" property="floorname" jdbcType="VARCHAR" />
+    <result column="pid" property="pid" jdbcType="INTEGER" />
+    <result column="seq" property="seq" jdbcType="INTEGER" />
+    <result column="display" property="display" jdbcType="BIT" />
+    
+  </resultMap>
+  
+  <resultMap id="BaseResultMap2" type="com.asjy.commerplat.model.Floor" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="addtime" property="addtime" jdbcType="TIMESTAMP" />
+    <result column="floorname" property="floorname" jdbcType="VARCHAR" />
+    <result column="pid" property="pid" jdbcType="INTEGER" />
+    <result column="seq" property="seq" jdbcType="INTEGER" />
+    <result column="display" property="display" jdbcType="BIT" />
+    <collection property="list_floor" ofType="com.asjy.commerplat.model.Floor">
+    	<id column="sonid" property="id" jdbcType="INTEGER" />
+	    <result column="sonaddtime" property="addtime" jdbcType="TIMESTAMP" />
+	    <result column="sonfloorname" property="floorname" jdbcType="VARCHAR" />
+	    <result column="sonpid" property="pid" jdbcType="INTEGER" />
+	    <result column="sonseq" property="seq" jdbcType="INTEGER" />
+	    <result column="sondisplay" property="display" jdbcType="BIT" />
+    </collection>
+  </resultMap>
+  
+  <resultMap id="BaseResultMap3" type="com.asjy.commerplat.model.Floor">
+    <id column="f1id" property="id" jdbcType="INTEGER" />
+    <result column="f1addtime" property="addtime" jdbcType="TIMESTAMP" />
+    <result column="f1floorname" property="floorname" jdbcType="VARCHAR" />
+    <result column="f1pid" property="pid" jdbcType="INTEGER" />
+    <result column="f1seq" property="seq" jdbcType="INTEGER" />
+    <result column="f1display" property="display" jdbcType="BIT" />
+    <collection property="list_floor" ofType="com.asjy.commerplat.model.Floor">
+    	<id column="f2id" property="id" jdbcType="INTEGER" />
+	    <result column="f2addtime" property="addtime" jdbcType="TIMESTAMP" />
+	    <result column="f2floorname" property="floorname" jdbcType="VARCHAR" />
+	    <result column="f2pid" property="pid" jdbcType="INTEGER" />
+	    <result column="f2seq" property="seq" jdbcType="INTEGER" />
+	    <result column="f2display" property="display" jdbcType="BIT" />
+	    <collection property="list_goods" ofType="com.asjy.commerplat.model.Goods">
+	    	<id column="g2id" property="id" jdbcType="INTEGER" />
+		    <result column="g2addtime" property="addtime" jdbcType="TIMESTAMP" />
+		    <result column="g2goodsname" property="goodsname" jdbcType="VARCHAR" />
+		    <result column="g2classid" property="classid" jdbcType="INTEGER" />
+		    <result column="g2brandid" property="brandid" jdbcType="INTEGER" />
+		    <result column="g2sellprice" property="sellprice" jdbcType="DECIMAL" />
+		    <result column="g2originalprice" property="originalprice" jdbcType="DECIMAL" />
+		    <result column="g2Inventory" property="inventory" jdbcType="INTEGER" />
+		    <result column="g2salevolume" property="salevolume" jdbcType="INTEGER" />
+		    <result column="g2clicks" property="clicks" jdbcType="INTEGER" />
+		    <result column="g2state" property="state" jdbcType="VARCHAR" />
+		    <result column="g2path" property="path" jdbcType="VARCHAR" />
+		    <result column="g2volume" property="volume" jdbcType="DECIMAL" />
+		    <result column="g2weight" property="weight" jdbcType="DECIMAL" />
+		    <result column="g2goodsnumber" property="goodsnumber" jdbcType="VARCHAR" />
+		    <result column="g2recommend" property="recommend" jdbcType="BIT" />
+    	</collection>
+    </collection>
+    <collection property="list_classes" ofType="com.asjy.commerplat.model.Classes">
+    	<id column="c1id" property="id" jdbcType="INTEGER" />
+	    <result column="c1addtime" property="addtime" jdbcType="TIMESTAMP" />
+	    <result column="c1deletestate" property="deletestate" jdbcType="BIT" />
+	    <result column="c1classname" property="classname" jdbcType="VARCHAR" />
+	    <result column="c1display" property="display" jdbcType="BIT" />
+	    <result column="c1pid" property="pid" jdbcType="INTEGER" />
+	    <result column="c1seq" property="seq" jdbcType="INTEGER" />
+	    <collection property="list_sonclasses" ofType="com.asjy.commerplat.model.Classes">
+	    	<id column="c2id" property="id" jdbcType="INTEGER" />
+		    <result column="c2addtime" property="addtime" jdbcType="TIMESTAMP" />
+		    <result column="c2deletestate" property="deletestate" jdbcType="BIT" />
+		    <result column="c2classname" property="classname" jdbcType="VARCHAR" />
+		    <result column="c2display" property="display" jdbcType="BIT" />
+		    <result column="c2pid" property="pid" jdbcType="INTEGER" />
+		    <result column="c2seq" property="seq" jdbcType="INTEGER" />
+    	</collection>
+    </collection>
+    <collection property="list_goods" ofType="com.asjy.commerplat.model.Goods">
+    	<id column="g1id" property="id" jdbcType="INTEGER" />
+	    <result column="g1addtime" property="addtime" jdbcType="TIMESTAMP" />
+	    <result column="g1goodsname" property="goodsname" jdbcType="VARCHAR" />
+	    <result column="g1classid" property="classid" jdbcType="INTEGER" />
+	    <result column="g1brandid" property="brandid" jdbcType="INTEGER" />
+	    <result column="g1sellprice" property="sellprice" jdbcType="DECIMAL" />
+	    <result column="g1originalprice" property="originalprice" jdbcType="DECIMAL" />
+	    <result column="g1Inventory" property="inventory" jdbcType="INTEGER" />
+	    <result column="g1salevolume" property="salevolume" jdbcType="INTEGER" />
+	    <result column="g1clicks" property="clicks" jdbcType="INTEGER" />
+	    <result column="g1state" property="state" jdbcType="VARCHAR" />
+	    <result column="g1path" property="path" jdbcType="VARCHAR" />
+	    <result column="g1volume" property="volume" jdbcType="DECIMAL" />
+	    <result column="g1weight" property="weight" jdbcType="DECIMAL" />
+	    <result column="g1goodsnumber" property="goodsnumber" jdbcType="VARCHAR" />
+	    <result column="g1recommend" property="recommend" jdbcType="BIT" />
+    </collection>
+  </resultMap>
+  
+  <sql id="Base_Column_List" >
+    <!--
+      WARNING - @mbggenerated
+      This element is automatically generated by MyBatis Generator, do not modify.
+    -->
+    id, addtime, floorname, pid, seq, display
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    <!--
+      WARNING - @mbggenerated
+      This element is automatically generated by MyBatis Generator, do not modify.
+    -->
+    select 
+    <include refid="Base_Column_List" />
+    from tb_floor
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  
+  
+  <select id="findByPid" resultMap="BaseResultMap2">
+    select 
+    f.id, f.addtime, f.floorname, f.pid, f.seq, f.display,
+    s.id as sonid, s.addtime as sonaddtime, s.floorname as sonfloorname, s.pid as sonpid, s.seq as sonseq, s.display as sondisplay
+    from tb_floor f
+    left join tb_floor s on s.id = f.pid
+    where f.pid = #{pid}
+    order by f.seq desc
+  </select>
+  
+  
+  
+  <select id="FloorSelectById" resultMap="BaseResultMap3">
+    select 
+    f.id as f1id, f.addtime as f1addtime, f.floorname as f1floorname, f.pid as f1pid, f.seq as f1seq, f.display as f1display,
+    s.id as f2id, s.addtime as f2addtime, s.floorname as f2floorname, s.pid as f2pid, s.seq as f2seq, s.display as f2display,
+    g1.id as g1id, g1.addtime as g1addtime, g1.goodsname as g1goodsname, g1.classid as g1classid, g1.brandid as g1brandid, g1.sellprice as g1sellprice, g1.originalprice as g1originalprice, g1.Inventory as g1Inventory, g1.salevolume as g1salevolume, g1.clicks as g1clicks, g1.state as g1state, g1.path as g1path, g1.volume as g1volume, g1.weight as g1weight, g1.goodsnumber as g1goodsnumber, g1.recommend as g1recommend,
+    g2.id as g2id, g2.addtime as g2addtime, g2.goodsname as g2goodsname, g2.classid as g2classid, g2.brandid as g2brandid, g2.sellprice as g2sellprice, g2.originalprice as g2originalprice, g2.Inventory as g2Inventory, g2.salevolume as g2salevolume, g2.clicks as g2clicks, g2.state as g2state, g2.path as g2path, g2.volume as g2volume, g2.weight as g2weight, g2.goodsnumber as g2goodsnumber, g2.recommend as g2recommend,
+    c1.id as c1id, c1.addtime as c1addtime, c1.deletestate as c1deletestate, c1.classname as c1classname, c1.display as c1display, c1.pid as c1pid, c1.seq as c1seq,
+    c2.id as c2id, c2.addtime as c2addtime, c2.deletestate as c2deletestate, c2.classname as c2classname, c2.display as c2display, c2.pid as c2pid, c2.seq as c2seq
+    from tb_floor f
+    left join tb_floor s on s.pid = f.id
+    left join tb_floor_goods fg1 on fg1.floorid = f.id
+    left join tb_floor_goods fg2 on fg2.floorid = s.id
+    left join tb_goods g1 on g1.id = fg1.goodsid
+    left join tb_goods g2 on g2.id = fg2.goodsid
+    left join tb_floor_classes fc on fc.floorid = f.id
+    left join tb_classes c1 on c1.id = fc.classesid
+    left join tb_classes c2 on c2.pid = c1.id
+    where f.id = #{id}
+     order by f.seq desc
+  </select>
+  
+  <select id="FloorSelectAll" resultMap="BaseResultMap3">
+    select 
+    f.id as f1id, f.addtime as f1addtime, f.floorname as f1floorname, f.pid as f1pid, f.seq as f1seq, f.display as f1display,
+    s.id as f2id, s.addtime as f2addtime, s.floorname as f2floorname, s.pid as f2pid, s.seq as f2seq, s.display as f2display,
+    g1.id as g1id, g1.addtime as g1addtime, g1.goodsname as g1goodsname, g1.classid as g1classid, g1.brandid as g1brandid, g1.sellprice as g1sellprice, g1.originalprice as g1originalprice, g1.Inventory as g1Inventory, g1.salevolume as g1salevolume, g1.clicks as g1clicks, g1.state as g1state, g1.path as g1path, g1.volume as g1volume, g1.weight as g1weight, g1.goodsnumber as g1goodsnumber, g1.recommend as g1recommend,
+    g2.id as g2id, g2.addtime as g2addtime, g2.goodsname as g2goodsname, g2.classid as g2classid, g2.brandid as g2brandid, g2.sellprice as g2sellprice, g2.originalprice as g2originalprice, g2.Inventory as g2Inventory, g2.salevolume as g2salevolume, g2.clicks as g2clicks, g2.state as g2state, g2.path as g2path, g2.volume as g2volume, g2.weight as g2weight, g2.goodsnumber as g2goodsnumber, g2.recommend as g2recommend,
+    c1.id as c1id, c1.addtime as c1addtime, c1.deletestate as c1deletestate, c1.classname as c1classname, c1.display as c1display, c1.pid as c1pid, c1.seq as c1seq,
+    c2.id as c2id, c2.addtime as c2addtime, c2.deletestate as c2deletestate, c2.classname as c2classname, c2.display as c2display, c2.pid as c2pid, c2.seq as c2seq
+    from tb_floor f
+    left join tb_floor s on s.pid = f.id
+    left join tb_floor_goods fg1 on fg1.floorid = f.id
+    left join tb_floor_goods fg2 on fg2.floorid = s.id
+    left join tb_goods g1 on g1.id = fg1.goodsid
+    left join tb_goods g2 on g2.id = fg2.goodsid
+    left join tb_floor_classes fc on fc.floorid = f.id
+    left join tb_classes c1 on c1.id = fc.classesid
+    left join tb_classes c2 on c2.pid = c1.id
+    where f.pid = 0
+     order by f.seq desc
+  </select>
+  
+  <select id="FloorSelectByDisplay" resultMap="BaseResultMap3">
+    select 
+    f.id as f1id, f.addtime as f1addtime, f.floorname as f1floorname, f.pid as f1pid, f.seq as f1seq, f.display as f1display,
+    s.id as f2id, s.addtime as f2addtime, s.floorname as f2floorname, s.pid as f2pid, s.seq as f2seq, s.display as f2display,
+    g1.id as g1id, g1.addtime as g1addtime, g1.goodsname as g1goodsname, g1.classid as g1classid, g1.brandid as g1brandid, g1.sellprice as g1sellprice, g1.originalprice as g1originalprice, g1.Inventory as g1Inventory, g1.salevolume as g1salevolume, g1.clicks as g1clicks, g1.state as g1state, g1.path as g1path, g1.volume as g1volume, g1.weight as g1weight, g1.goodsnumber as g1goodsnumber, g1.recommend as g1recommend,
+    g2.id as g2id, g2.addtime as g2addtime, g2.goodsname as g2goodsname, g2.classid as g2classid, g2.brandid as g2brandid, g2.sellprice as g2sellprice, g2.originalprice as g2originalprice, g2.Inventory as g2Inventory, g2.salevolume as g2salevolume, g2.clicks as g2clicks, g2.state as g2state, g2.path as g2path, g2.volume as g2volume, g2.weight as g2weight, g2.goodsnumber as g2goodsnumber, g2.recommend as g2recommend,
+    c1.id as c1id, c1.addtime as c1addtime, c1.deletestate as c1deletestate, c1.classname as c1classname, c1.display as c1display, c1.pid as c1pid, c1.seq as c1seq,
+    c2.id as c2id, c2.addtime as c2addtime, c2.deletestate as c2deletestate, c2.classname as c2classname, c2.display as c2display, c2.pid as c2pid, c2.seq as c2seq
+    from tb_floor f
+    left join tb_floor s on s.pid = f.id
+    left join tb_floor_goods fg1 on fg1.floorid = f.id
+    left join tb_floor_goods fg2 on fg2.floorid = s.id
+    left join tb_goods g1 on g1.id = fg1.goodsid
+    left join tb_goods g2 on g2.id = fg2.goodsid
+    left join tb_floor_classes fc on fc.floorid = f.id
+    left join tb_classes c1 on c1.id = fc.classesid
+    left join tb_classes c2 on c2.pid = c1.id
+    where f.display = 1
+    and f.pid = 0
+    order by f.seq desc
+  </select>
+  
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    <!--
+      WARNING - @mbggenerated
+      This element is automatically generated by MyBatis Generator, do not modify.
+    -->
+    delete from tb_floor
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  
+  
+  <delete id="ajaxdeleteids">
+    delete from tb_floor
+    where id in 
+    <foreach collection="list" item="item" index="index" open="(" separator="," close=")">
+         #{item}
+    </foreach>
+  </delete>
+  
+  <insert id="insert" parameterType="com.asjy.commerplat.model.Floor" >
+    <!--
+      WARNING - @mbggenerated
+      This element is automatically generated by MyBatis Generator, do not modify.
+    -->
+    insert into tb_floor (id, addtime, floorname, 
+      pid, seq, display)
+    values (#{id,jdbcType=INTEGER}, #{addtime,jdbcType=TIMESTAMP}, #{floorname,jdbcType=VARCHAR}, 
+      #{pid,jdbcType=INTEGER}, #{seq,jdbcType=INTEGER}, #{display,jdbcType=BIT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.asjy.commerplat.model.Floor" >
+    <!--
+      WARNING - @mbggenerated
+      This element is automatically generated by MyBatis Generator, do not modify.
+    -->
+    insert into tb_floor
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="addtime != null" >
+        addtime,
+      </if>
+      <if test="floorname != null" >
+        floorname,
+      </if>
+      <if test="pid != null" >
+        pid,
+      </if>
+      <if test="seq != null" >
+        seq,
+      </if>
+      <if test="display != null" >
+        display,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="addtime != null" >
+        #{addtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="floorname != null" >
+        #{floorname,jdbcType=VARCHAR},
+      </if>
+      <if test="pid != null" >
+        #{pid,jdbcType=INTEGER},
+      </if>
+      <if test="seq != null" >
+        #{seq,jdbcType=INTEGER},
+      </if>
+      <if test="display != null" >
+        #{display,jdbcType=BIT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.asjy.commerplat.model.Floor" >
+    <!--
+      WARNING - @mbggenerated
+      This element is automatically generated by MyBatis Generator, do not modify.
+    -->
+    update tb_floor
+    <set >
+      <if test="addtime != null" >
+        addtime = #{addtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="floorname != null" >
+        floorname = #{floorname,jdbcType=VARCHAR},
+      </if>
+      <if test="pid != null" >
+        pid = #{pid,jdbcType=INTEGER},
+      </if>
+      <if test="seq != null" >
+        seq = #{seq,jdbcType=INTEGER},
+      </if>
+      <if test="display != null" >
+        display = #{display,jdbcType=BIT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.asjy.commerplat.model.Floor" >
+    <!--
+      WARNING - @mbggenerated
+      This element is automatically generated by MyBatis Generator, do not modify.
+    -->
+    update tb_floor
+    set addtime = #{addtime,jdbcType=TIMESTAMP},
+      floorname = #{floorname,jdbcType=VARCHAR},
+      pid = #{pid,jdbcType=INTEGER},
+      seq = #{seq,jdbcType=INTEGER},
+      display = #{display,jdbcType=BIT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
